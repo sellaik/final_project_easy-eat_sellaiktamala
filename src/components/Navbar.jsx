@@ -32,7 +32,7 @@ export default function Navbar() {
         </li>
 
         <li>
-          <Link to="/inventaris" className="text-orange-500">
+          <Link to="/inventaris" className="hover:text-orange-500">
             Inventaris
           </Link>
         </li>

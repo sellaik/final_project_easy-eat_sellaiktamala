@@ -8,6 +8,7 @@ import StokRendah from "./pages/StokRendah";
 import StokTersedia from "./pages/StokTersedia";
 import SegeraKedaluwarsa from "./pages/SegeraKadaluwarsa";
 import ProductDetail from "./pages/ProductDetail";
+import Kasir from "./pages/Kasir";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/kasir" element={<POS />} />
+        <Route path="/" element={<POS />} />
+        <Route path="/kasir" element={<Kasir />} />
         <Route path="/inventaris" element={<Inventaris />} />
         <Route path="/stok-habis" element={<StokHabis />} />
         <Route path="/stok-rendah" element={<StokRendah />} />

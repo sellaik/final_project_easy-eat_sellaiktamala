@@ -1,9 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
+import AddStockModal from "../components/AddStockModal";
 
 export default function ProductDetail() {
   const { name } = useParams();
   const navigate = useNavigate();
+
+  const [openModal, setOpenModal] = useState(false);
 
   const data = [
     {
@@ -36,37 +40,44 @@ export default function ProductDetail() {
   return (
     <div className="bg-[#f6f3ef] min-h-screen">
       {/* ALERT */}
-      <div className="bg-[#5b2e0f] text-white px-12 py-3 flex justify-between items-center text-sm">
+      <div className="bg-[#5b2e0f] text-white px-10 py-3 flex justify-between items-center text-sm">
         <p>
           ⚠ Peringatan Penting: Terdapat 5 bahan yang akan segera kadaluwarsa
           dan 2 bahan dengan stok rendah. Segera lakukan pengecekan.
         </p>
 
-        <button className="bg-orange-500 px-5 py-2 rounded-md">
+        <button className="bg-orange-500 px-6 py-2 rounded-md hover:bg-orange-600">
           Cek Sekarang
         </button>
       </div>
 
-      <div className="px-14 py-10">
+      {/* CONTAINER */}
+      <div className="max-w-[1300px] mx-auto px-10 py-10">
         {/* BACK */}
-        <button onClick={() => navigate(-1)} className="text-3xl mb-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-2xl mb-6 text-gray-700"
+        >
           ←
         </button>
 
-        {/* TITLE + ACTION */}
+        {/* TITLE */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-gray-800">{name}</h1>
+            <h1 className="text-[38px] font-bold text-gray-800">{name}</h1>
 
-            <p className="text-[#c47a3d] mt-1">Detail Produk</p>
+            <p className="text-[#c47a3d] mt-1 text-[15px]">Detail Produk</p>
           </div>
 
           <div className="flex gap-4">
-            <button className="border border-gray-300 bg-white px-6 py-3 rounded-xl text-sm flex items-center gap-2">
+            <button className="flex items-center gap-2 border border-[#e8e2da] bg-white px-6 py-3 rounded-xl text-sm font-medium">
               ⬇ Ekspor Laporan
             </button>
 
-            <button className="bg-orange-500 text-white px-6 py-3 rounded-xl text-sm flex items-center gap-2">
+            <button
+              onClick={() => setOpenModal(true)}
+              className="flex items-center gap-2 bg-[#F97316] text-white px-6 py-3 rounded-xl text-sm font-medium"
+            >
               + Tambah Stok
             </button>
           </div>
@@ -74,70 +85,20 @@ export default function ProductDetail() {
 
         {/* STATUS CARDS */}
         <div className="grid grid-cols-4 gap-6 mb-10">
-          {/* CARD */}
-          <div className="bg-white border border-orange-400 rounded-2xl px-6 py-6 flex justify-between items-center">
-            <div>
-              <p className="text-xs text-gray-500 uppercase tracking-wide">
-                Stok Habis
-              </p>
+          <Card title="STOK HABIS" value="1" color="red" icon="!" />
 
-              <p className="text-3xl font-bold mt-1">1</p>
-            </div>
+          <Card title="STOK RENDAH" value="2" color="yellow" icon="⚠" />
 
-            <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-500 text-xl">
-              !
-            </div>
-          </div>
+          <Card title="STOK TERSEDIA" value="5" color="green" icon="✓" />
 
-          <div className="bg-white border border-orange-400 rounded-2xl px-6 py-6 flex justify-between items-center">
-            <div>
-              <p className="text-xs text-gray-500 uppercase tracking-wide">
-                Stok Rendah
-              </p>
-
-              <p className="text-3xl font-bold mt-1">2</p>
-            </div>
-
-            <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-xl">
-              ⚠
-            </div>
-          </div>
-
-          <div className="bg-white border border-orange-400 rounded-2xl px-6 py-6 flex justify-between items-center">
-            <div>
-              <p className="text-xs text-gray-500 uppercase tracking-wide">
-                Stok Tersedia
-              </p>
-
-              <p className="text-3xl font-bold mt-1">5</p>
-            </div>
-
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl">
-              ✓
-            </div>
-          </div>
-
-          <div className="bg-white border border-orange-400 rounded-2xl px-6 py-6 flex justify-between items-center">
-            <div>
-              <p className="text-xs text-gray-500 uppercase tracking-wide">
-                Segera Kedaluwarsa
-              </p>
-
-              <p className="text-3xl font-bold mt-1">4</p>
-            </div>
-
-            <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 text-xl">
-              ⏱
-            </div>
-          </div>
+          <Card title="SEGERA KEDALUWARSA" value="4" color="orange" icon="⏱" />
         </div>
 
         {/* TABLE */}
-        <div className="bg-white border border-[#e8e2da] rounded-2xl overflow-hidden">
-          <table className="w-full">
-            {/* HEADER */}
-            <thead className="bg-[#f4efe9] text-xs text-[#8c6b4f] uppercase tracking-wide">
-              <tr>
+        <div className="bg-[#f8f5f2] border border-[#e8e2da] rounded-2xl overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="text-xs text-[#9c7c5b] uppercase">
+              <tr className="border-b border-[#e5ded6]">
                 <th className="text-left px-8 py-5">SKU PRODUK</th>
                 <th className="text-left px-8 py-5">TANGGAL BELI</th>
                 <th className="text-left px-8 py-5">JUMLAH</th>
@@ -147,16 +108,17 @@ export default function ProductDetail() {
               </tr>
             </thead>
 
-            {/* BODY */}
             <tbody>
               {data.map((item, i) => (
                 <tr
                   key={i}
-                  className={`border-t ${item.highlight ? "bg-[#f7f3ee]" : ""}`}
+                  className={`border-t border-[#e5ded6] ${
+                    item.highlight ? "bg-[#f2ede7]" : ""
+                  }`}
                 >
                   <td className="px-8 py-6 font-semibold">{item.sku}</td>
 
-                  <td className="px-8 py-6 font-medium">{item.buy}</td>
+                  <td className="px-8 py-6">{item.buy}</td>
 
                   <td className="px-8 py-6">{item.qty}</td>
 
@@ -164,18 +126,18 @@ export default function ProductDetail() {
 
                   <td className="px-8 py-6">
                     <span
-                      className={`px-5 py-2 rounded-full text-xs font-semibold ${item.color}`}
+                      className={`px-4 py-1 rounded-full text-xs font-semibold ${item.color}`}
                     >
                       {item.status}
                     </span>
                   </td>
 
-                  <td className="px-8 py-6 flex items-center justify-end gap-3">
-                    <button className="border border-orange-500 text-orange-500 px-5 py-2 rounded-xl text-sm font-medium">
+                  <td className="px-8 py-6 flex justify-end gap-3">
+                    <button className="border border-orange-500 text-orange-500 px-5 py-2 rounded-xl text-sm">
                       Perbarui
                     </button>
 
-                    <div className="w-9 h-9 border border-gray-300 rounded-full flex items-center justify-center text-gray-400">
+                    <div className="w-9 h-9 border border-[#ddd] rounded-full flex items-center justify-center text-gray-400">
                       ⋮
                     </div>
                   </td>
@@ -185,7 +147,7 @@ export default function ProductDetail() {
           </table>
 
           {/* FOOTER */}
-          <div className="flex justify-between items-center px-8 py-4 text-sm text-gray-500 border-t">
+          <div className="flex justify-between items-center px-8 py-4 text-sm text-gray-500 border-t border-[#e5ded6]">
             <p>Menampilkan 1-7 dari 15 bahan</p>
 
             <div className="flex gap-2">
@@ -199,6 +161,33 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
+      </div>
+
+      {openModal && <AddStockModal closeModal={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function Card({ title, value, icon, color }) {
+  const colors = {
+    red: "bg-red-100 text-red-500",
+    yellow: "bg-yellow-100 text-yellow-600",
+    green: "bg-green-100 text-green-600",
+    orange: "bg-orange-100 text-orange-500",
+  };
+
+  return (
+    <div className="bg-white border border-orange-300 rounded-2xl px-6 py-6 flex justify-between items-center">
+      <div>
+        <p className="text-xs text-gray-500 uppercase">{title}</p>
+
+        <p className="text-3xl font-bold mt-1">{value}</p>
+      </div>
+
+      <div
+        className={`w-12 h-12 rounded-full flex items-center justify-center text-xl ${colors[color]}`}
+      >
+        {icon}
       </div>
     </div>
   );
