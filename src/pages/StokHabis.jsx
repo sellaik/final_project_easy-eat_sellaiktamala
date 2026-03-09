@@ -1,4 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 export default function StokHabis() {
+  const navigate = useNavigate();
+  const [filter, setFilter] = useState("STOK HABIS");
+
   const items = [
     {
       name: "Syrup Butterscotch",
@@ -48,9 +54,27 @@ export default function StokHabis() {
         </div>
 
         {/* STATUS CARDS */}
-        <div className="grid grid-cols-4 gap-6 mb-10">
-          {/* ACTIVE CARD */}
-          <div className="bg-orange-500 text-white rounded-xl p-6 flex justify-between items-center">
+        <div className="grid grid-cols-5 gap-6 mb-10">
+          {/* SEMUA STOK */}
+          <div
+            onClick={() => navigate("/inventaris")}
+            className="bg-white border border-orange-300 rounded-xl p-6 flex justify-between items-center cursor-pointer hover:shadow-md"
+          >
+            <div>
+              <p className="text-xs text-gray-500 mb-1">SEMUA STOK</p>
+              <p className="text-3xl font-bold">7</p>
+            </div>
+
+            <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+              📦
+            </div>
+          </div>
+
+          {/* STOK HABIS (ACTIVE) */}
+          <div
+            onClick={() => navigate("/stok-habis")}
+            className="bg-orange-500 text-white rounded-xl p-6 flex justify-between items-center cursor-pointer"
+          >
             <div>
               <p className="text-xs opacity-80 mb-1">STOK HABIS</p>
               <p className="text-3xl font-bold">1</p>
@@ -61,7 +85,11 @@ export default function StokHabis() {
             </div>
           </div>
 
-          <div className="bg-white border border-orange-300 rounded-xl p-6 flex justify-between items-center">
+          {/* STOK RENDAH */}
+          <div
+            onClick={() => navigate("/stok-rendah")}
+            className="bg-white border border-orange-300 rounded-xl p-6 flex justify-between items-center cursor-pointer hover:shadow-md"
+          >
             <div>
               <p className="text-xs text-gray-500 mb-1">STOK RENDAH</p>
               <p className="text-3xl font-bold">2</p>
@@ -72,7 +100,11 @@ export default function StokHabis() {
             </div>
           </div>
 
-          <div className="bg-white border border-orange-300 rounded-xl p-6 flex justify-between items-center">
+          {/* STOK TERSEDIA */}
+          <div
+            onClick={() => navigate("/stok-tersedia")}
+            className="bg-white border border-orange-300 rounded-xl p-6 flex justify-between items-center cursor-pointer hover:shadow-md"
+          >
             <div>
               <p className="text-xs text-gray-500 mb-1">STOK TERSEDIA</p>
               <p className="text-3xl font-bold">5</p>
@@ -83,7 +115,11 @@ export default function StokHabis() {
             </div>
           </div>
 
-          <div className="bg-white border border-orange-300 rounded-xl p-6 flex justify-between items-center">
+          {/* SEGERA KEDALUWARSA */}
+          <div
+            onClick={() => navigate("/kedaluwarsa")}
+            className="bg-white border border-orange-300 rounded-xl p-6 flex justify-between items-center cursor-pointer hover:shadow-md"
+          >
             <div>
               <p className="text-xs text-gray-500 mb-1">SEGERA KEDALUWARSA</p>
               <p className="text-3xl font-bold">4</p>
@@ -98,7 +134,6 @@ export default function StokHabis() {
         {/* TABLE */}
         <div className="bg-[#faf8f5] border border-[#e8e2da] rounded-xl overflow-hidden">
           <table className="w-full text-sm">
-            {/* HEADER */}
             <thead className="bg-[#f4efe9] text-gray-500 text-xs">
               <tr>
                 <th className="text-left px-6 py-4">NAMA BAHAN</th>
@@ -109,7 +144,6 @@ export default function StokHabis() {
               </tr>
             </thead>
 
-            {/* BODY */}
             <tbody>
               {items.map((item, i) => (
                 <tr key={i} className="hover:bg-[#f7f3ee]">

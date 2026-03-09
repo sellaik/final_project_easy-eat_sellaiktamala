@@ -109,13 +109,13 @@ export default function SegeraKedaluwarsa() {
           </div>
 
           {/* ACTIVE CARD */}
-          <div className="bg-white border border-orange-400 rounded-xl p-6 flex justify-between items-center">
+          <div className="bg-orange-500 text-white rounded-xl p-6 flex justify-between items-center">
             <div>
-              <p className="text-xs text-gray-500 mb-1">SEGERA KEDALUWARSA</p>
+              <p className="text-xs opacity-80 mb-1">SEGERA KADALUWARSA</p>
               <p className="text-3xl font-bold">4</p>
             </div>
 
-            <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-500">
+            <div className="w-12 h-12 rounded-full bg-white/30 flex items-center justify-center">
               ⏱
             </div>
           </div>
@@ -184,11 +184,6 @@ export default function SegeraKedaluwarsa() {
               <button className="bg-orange-500 text-white w-8 h-8 rounded">
                 1
               </button>
-
-              <button className="border w-8 h-8 rounded">2</button>
-
-              <button className="border w-8 h-8 rounded">3</button>
-
               <button className="border w-8 h-8 rounded">›</button>
             </div>
           </div>
